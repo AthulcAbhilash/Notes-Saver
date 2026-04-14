@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Note's</title>
+  <link rel="icon" href="./logo.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="./logo.png" alt="Logo" class="brand-logo" />
+      <h1>Note's</h1>
+    </div>
+
+    <div class="topbar-actions">
+      <input
+        type="text"
+        id="search"
+        class="search-input"
+        placeholder="Search notes..."
+        oninput="displayNotes()"
+      />
+      <button class="top-btn danger" onclick="clearAllNotes()">Clear All</button>
+      <button class="top-btn" onclick="undoLastAction()">Undo</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="notesList" class="notes-container"></section>
+  </main>
+
+  <button class="add-btn" onclick="openEditor()">+</button>
+
+  <!-- Editor Modal -->
+  <div id="editorOverlay" class="overlay hidden" onclick="handleEditorOverlayClick(event)">
+    <div class="editor-modal">
+      <div class="modal-header">
+        <h2 id="editorTitle">Add Note</h2>
+        <button class="icon-btn close-btn" onclick="closeEditor()">✕</button>
+      </div>
+
+      <input type="text" id="title" class="title-input" placeholder="Title" />
+
+      <textarea
+        id="noteInput"
+        class="note-textarea"
+        placeholder="Start writing your note..."
+      ></textarea>
+
+      <div class="editor-footer">
+        <select id="color" class="color-select">
+          <option value="#F6E39A">Yellow</option>
+          <option value="#F4B5A6">Peach</option>
+          <option value="#9EE7E5">Cyan</option>
+          <option value="#AFA7F8">Purple</option>
+          <option value="#AEE9C7">Green</option>
+          <option value="#F7A9D3">Pink</option>
+          <option value="#AEB6BF">Gray</option>
+        </select>
+
+        <div class="editor-actions">
+          <button class="primary-btn" onclick="saveNote()">Save</button>
+          <button class="secondary-btn" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Modal -->
+  <div id="viewOverlay" class="overlay hidden" onclick="handleViewOverlayClick(event)">
+    <div class="view-modal">
+      <div class="modal-header">
+        <h2 id="viewNoteTitle">Note</h2>
+        <button class="icon-btn close-btn" onclick="closeView()">✕</button>
+      </div>
+
+      <div id="viewNoteMeta" class="view-meta"></div>
+
+      <div id="viewNoteContent" class="view-content"></div>
+
+      <div class="view-footer">
+        <button class="secondary-btn" onclick="closeView()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
